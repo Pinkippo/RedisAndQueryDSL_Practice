@@ -1,6 +1,7 @@
 package com.example.traffic.prac_one;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,5 +23,11 @@ public class PracEntity {
 
     private String email;
 
-
+    @Builder
+    public PracEntity(Long id, String name, int age, String email) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
 }
