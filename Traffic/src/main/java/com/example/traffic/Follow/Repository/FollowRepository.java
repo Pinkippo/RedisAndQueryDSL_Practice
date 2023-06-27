@@ -1,7 +1,7 @@
 package com.example.traffic.Follow.Repository;
 
-import com.example.traffic.Follow.FollowEntity;
-import com.example.traffic.Follow.FollowId;
+import com.example.traffic.Follow.DATA.FollowEntity;
+import com.example.traffic.Follow.DATA.FollowId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,7 +1,7 @@
-package com.example.traffic.Comment;
+package com.example.traffic.Comment.DATA;
 
-import com.example.traffic.Board.BoardEntity;
-import com.example.traffic.User.UserEntity;
+import com.example.traffic.Board.DATA.BoardEntity;
+import com.example.traffic.User.DATA.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

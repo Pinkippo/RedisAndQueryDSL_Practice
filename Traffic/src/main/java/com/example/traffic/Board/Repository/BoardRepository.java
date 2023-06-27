@@ -1,6 +1,6 @@
 package com.example.traffic.Board.Repository;
 
-import com.example.traffic.Board.BoardEntity;
+import com.example.traffic.Board.DATA.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

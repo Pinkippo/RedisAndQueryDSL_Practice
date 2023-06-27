@@ -1,5 +1,5 @@
-package com.example.traffic.Follow;
-import com.example.traffic.User.UserEntity;
+package com.example.traffic.Follow.DATA;
+import com.example.traffic.User.DATA.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

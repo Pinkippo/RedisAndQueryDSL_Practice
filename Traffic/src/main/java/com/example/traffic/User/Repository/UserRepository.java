@@ -1,6 +1,6 @@
 package com.example.traffic.User.Repository;
 
-import com.example.traffic.User.UserEntity;
+import com.example.traffic.User.DATA.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

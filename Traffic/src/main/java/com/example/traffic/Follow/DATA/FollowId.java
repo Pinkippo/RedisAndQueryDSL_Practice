@@ -1,6 +1,6 @@
-package com.example.traffic.Follow;
+package com.example.traffic.Follow.DATA;
 
-import com.example.traffic.User.UserEntity;
+import com.example.traffic.User.DATA.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

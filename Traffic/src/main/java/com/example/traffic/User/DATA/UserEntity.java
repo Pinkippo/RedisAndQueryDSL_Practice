@@ -1,8 +1,8 @@
-package com.example.traffic.User;
+package com.example.traffic.User.DATA;
 
-import com.example.traffic.Board.BoardEntity;
-import com.example.traffic.Follow.FollowEntity;
-import com.example.traffic.Recommend.RecommendEntity;
+import com.example.traffic.Board.DATA.BoardEntity;
+import com.example.traffic.Follow.DATA.FollowEntity;
+import com.example.traffic.Recommend.DATA.RecommendEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,6 @@
 package com.example.traffic.Comment.Repository;
 
-import com.example.traffic.Comment.CommentEntity;
+import com.example.traffic.Comment.DATA.CommentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
