@@ -1,6 +1,4 @@
 package com.example.traffic.Follow;
-
-import com.example.traffic.Board.BoardEntity;
 import com.example.traffic.User.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
