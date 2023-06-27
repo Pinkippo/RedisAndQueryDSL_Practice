@@ -3,12 +3,14 @@ spring:
     redis:
       port: 6379
       host: localhost
+
   mvc:
     path match:
       matching-strategy: ant_path_matcher
     hidden-method:
       filter:
         enabled: true
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,11 +18,13 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate.default_batch_fetch_size: 500
+
   datasource:
     url: jdbc:mysql://localhost:3306/traffic?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234567890
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -29,6 +33,7 @@ spring:
     remote:
       restart:
         enabled: true
+
   servlet:
     multipart:
       max-file-size: 20MB
