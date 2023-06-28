@@ -4,5 +4,5 @@ import com.example.traffic.Recommend.DATA.RecommendEntity;
 import com.example.traffic.Recommend.DATA.RecommendId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RecommendRepository extends JpaRepository<RecommendEntity, RecommendId> {
+public interface RecommendRepository extends JpaRepository<RecommendEntity, RecommendId>, RecommendRepositoryCustom{
 }
