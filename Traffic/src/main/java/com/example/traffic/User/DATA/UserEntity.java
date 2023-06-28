@@ -37,7 +37,8 @@ public class UserEntity {
     @OneToMany(mappedBy = "followee", orphanRemoval = true)
     private List<FollowEntity> followees;
 
-
-
-
+    public UserEntity(String pw, String name) {
+        this.pw = pw;
+        this.name = name;
+    }
 }
