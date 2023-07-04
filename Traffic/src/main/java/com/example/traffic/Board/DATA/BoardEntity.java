@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,11 @@ public class BoardEntity {
     private UserEntity user;
 
     @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date writeDate;
+
+    @Column(name="title")
+    private String title;
 
     @Column(name="content", length = 254)
     private String content;
@@ -49,5 +54,9 @@ public class BoardEntity {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> comments;
 
-
+    public BoardEntity(UserEntity user, String title, String content) {
+        this.user = user;
+        this.title = title;
+        this.content = content;
+    }
 }

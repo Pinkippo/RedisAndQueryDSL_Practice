@@ -19,11 +19,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
 
-    @Column(name="pw")
-    private String pw;
 
     @Column(name="name", unique = true)
     private String name;
+
+    @Column(name="pw")
+    private String pw;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<BoardEntity> boards;
@@ -37,8 +38,8 @@ public class UserEntity {
     @OneToMany(mappedBy = "followee", orphanRemoval = true)
     private List<FollowEntity> followees;
 
-    public UserEntity(String pw, String name) {
-        this.pw = pw;
+    public UserEntity(String name, String pw) {
         this.name = name;
+        this.pw = pw;
     }
 }

@@ -13,4 +13,6 @@ public class ResponseMessage {
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
     public static final String DB_ERROR = "데이터베이스 에러";
 
+    public static final String WRITE_BOARD = "글 작성 성공";
+
 }
