@@ -5,6 +5,7 @@ import com.example.traffic.User.DATA.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -29,9 +30,15 @@ public class CommentEntity {
     private BoardEntity board;
 
     @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date writeDate;
 
     @Column(name="content", length = 100)
     private String content;
 
+    public CommentEntity(UserEntity user, BoardEntity board, String content) {
+        this.user = user;
+        this.board = board;
+        this.content = content;
+    }
 }

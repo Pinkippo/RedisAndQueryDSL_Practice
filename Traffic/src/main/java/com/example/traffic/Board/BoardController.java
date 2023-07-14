@@ -31,12 +31,12 @@ public class BoardController {
         }else{
             return new ResponseEntity<>(DefaultRes.res(StatusCode.DB_ERROR,ResponseMessage.NOT_FOUND_USER, null), HttpStatus.OK);
         }
-
     }
 
-    // 글 조회
+    // 단일 글 조회
 
-    // 글 리스트
+
+    // 전체 글 조회
 
 
 }

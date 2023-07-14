@@ -15,4 +15,10 @@ public class ResponseMessage {
 
     public static final String WRITE_BOARD = "글 작성 성공";
 
+    public static final String WRITE_COMMENT = "댓글 작성 성공";
+
+    public static final String NOT_CREATE_BOARD = "글을 찾을 수 없습니다.";
+
+
+
 }

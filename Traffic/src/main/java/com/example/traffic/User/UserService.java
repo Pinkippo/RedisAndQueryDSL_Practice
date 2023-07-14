@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -16,6 +18,10 @@ public class UserService {
     public long UserRegister(String name, String pw){
         UserEntity user = new UserEntity(name,pw);
         return userRepository.save(user).getUid();
+    }
+
+    public Optional<UserEntity> FindUser(long uid){
+        return userRepository.findById(uid);
     }
 
 }

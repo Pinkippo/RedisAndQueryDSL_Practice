@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class CommentForBoardDTO {
+
     private String name;
     private Date writeDate;
     private String content;
