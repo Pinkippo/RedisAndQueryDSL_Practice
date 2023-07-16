@@ -70,5 +70,30 @@ public class BoardService {
 
 
     }
+    public SpecBoardResponseDTO ReadOneBoardByDsl(long bid){
+        BoardEntity boardEntity =  boardRepository.ReadOneboardByDsl(bid);
+        if(boardEntity != null){
+            List<CommentEntity> commentEntities = boardEntity.getComments();
+
+            List<CommentForBoardDTO> commentDtoList = commentEntities.stream().map(
+                    comment -> new CommentForBoardDTO(comment.getUser().getName(), comment.getWriteDate(), comment.getContent())
+            ).toList();
+
+            return SpecBoardResponseDTO.builder()
+                    .bid(boardEntity.getBid())
+                    .userResponseDTO(new UserResponseDTO(boardEntity.getUser()))
+                    .writeDate(boardEntity.getWriteDate())
+                    .title(boardEntity.getTitle())
+                    .content(boardEntity.getContent())
+                    .view(boardEntity.getView())
+                    .recommend(boardEntity.getRecommend())
+                    .comments(commentDtoList)
+                    .build();
+        }else{
+            return null;
+        }
+
+
+    }
 
 }

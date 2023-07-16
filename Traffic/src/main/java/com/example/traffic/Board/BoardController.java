@@ -30,11 +30,21 @@ public class BoardController {
         }
     }
 
-    // 단일 글 조회 - JPA 이용한 v1 (쿼리 3줄 나옴)
-    // QueryDSL 이용 한방 쿼리로 변경 예정
+    // 게시물_단일_조회_v1 - JPA 이용 (쿼리 3줄 나옴)
     @GetMapping("/read/{bid}")
     public ResponseEntity<DefaultRes<SpecBoardResponseDTO>> ReadOneBoard(@PathVariable long bid){
         SpecBoardResponseDTO spec = boardService.ReadOneBoard(bid);
+        if(spec != null){
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+        }
+    }
+
+    // 게시물_단일_조회_v2 - QueryDSL 이용 (쿼리 3줄 나옴)
+    @GetMapping("/read2/{bid}")
+    public ResponseEntity<DefaultRes<SpecBoardResponseDTO>> ReadOneBoardByDsl(@PathVariable long bid){
+        SpecBoardResponseDTO spec = boardService.ReadOneBoardByDsl(bid);
         if(spec != null){
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
         }else{
