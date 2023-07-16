@@ -7,10 +7,7 @@ import com.example.traffic.httpReturn.ResponseMessage;
 import com.example.traffic.httpReturn.StatusCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/board")
@@ -33,7 +30,17 @@ public class BoardController {
         }
     }
 
-    // 단일 글 조회
+    // 단일 글 조회 - JPA 이용한 v1 (쿼리 3줄 나옴)
+    // QueryDSL 이용 한방 쿼리로 변경 예정
+    @GetMapping("/read/{bid}")
+    public ResponseEntity<DefaultRes<SpecBoardResponseDTO>> ReadOneBoard(@PathVariable long bid){
+        SpecBoardResponseDTO spec = boardService.ReadOneBoard(bid);
+        if(spec != null){
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+        }
+    }
 
 
     // 전체 글 조회

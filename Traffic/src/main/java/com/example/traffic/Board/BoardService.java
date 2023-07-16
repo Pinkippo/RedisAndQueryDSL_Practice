@@ -4,6 +4,8 @@ import com.example.traffic.Board.DATA.BoardEntity;
 import com.example.traffic.Board.DATA.BoardRequestDTO;
 import com.example.traffic.Board.DATA.SpecBoardResponseDTO;
 import com.example.traffic.Board.Repository.BoardRepository;
+import com.example.traffic.Comment.DATA.CommentEntity;
+import com.example.traffic.Comment.DATA.CommentForBoardDTO;
 import com.example.traffic.User.DATA.UserEntity;
 import com.example.traffic.User.DATA.UserResponseDTO;
 import com.example.traffic.User.Repository.UserRepository;
@@ -11,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -39,4 +43,32 @@ public class BoardService {
                 .build();
 
     }
+
+    public SpecBoardResponseDTO ReadOneBoard(long bid){
+        Optional<BoardEntity> boardEntity =  boardRepository.findById(bid);
+        if(boardEntity.isPresent()){
+            BoardEntity board = boardEntity.get();
+            List<CommentEntity> commentEntities = board.getComments();
+
+            List<CommentForBoardDTO> commentDtoList = commentEntities.stream().map(
+                    comment -> new CommentForBoardDTO(comment.getUser().getName(), comment.getWriteDate(), comment.getContent())
+            ).toList();
+
+            return SpecBoardResponseDTO.builder()
+                    .bid(board.getBid())
+                    .userResponseDTO(new UserResponseDTO(board.getUser()))
+                    .writeDate(board.getWriteDate())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .view(board.getView())
+                    .recommend(board.getRecommend())
+                    .comments(commentDtoList)
+                    .build();
+        }else{
+            return null;
+        }
+
+
+    }
+
 }

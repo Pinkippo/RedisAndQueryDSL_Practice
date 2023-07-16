@@ -10,4 +10,9 @@ public class UserResponseDTO {
     private long uid;
     private String name;
 
+    public UserResponseDTO(UserEntity user){
+        this.uid = user.getUid();
+        this.name = user.getName();
+    }
+
 }
