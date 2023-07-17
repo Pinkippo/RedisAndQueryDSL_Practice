@@ -19,6 +19,7 @@ public class ResponseMessage {
 
     public static final String NOT_CREATE_BOARD = "글을 찾을 수 없습니다.";
 
+    public static final String READ_SUCCESS = "데이터베이스 조회 성공";
 
 
 }

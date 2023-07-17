@@ -13,9 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -94,6 +94,33 @@ public class BoardService {
         }
 
 
+    }
+
+    public List<SpecBoardResponseDTO> ReadBoard(){
+        List<BoardEntity> boardEntities = boardRepository.ReadBoardByDsl();
+        List<SpecBoardResponseDTO> result = new ArrayList<>();
+
+        for (BoardEntity board: boardEntities) {
+            List<CommentForBoardDTO> comments = board.getComments().stream().map(
+                    comment -> new CommentForBoardDTO(comment.getUser().getName(), comment.getWriteDate(), comment.getContent())
+            ).toList();
+
+            SpecBoardResponseDTO specBoardResponseDTO = SpecBoardResponseDTO.builder()
+                    .bid(board.getBid())
+                    .userResponseDTO(new UserResponseDTO(board.getUser()))
+                    .writeDate(board.getWriteDate())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .view(board.getView())
+                    .recommend(board.getRecommend())
+                    .comments(comments)
+                    .build();
+
+            result.add(specBoardResponseDTO);
+
+        }
+
+        return result;
     }
 
 }

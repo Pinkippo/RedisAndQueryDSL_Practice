@@ -10,4 +10,6 @@ import java.util.List;
 public interface BoardRepositoryCustom {
 
     BoardEntity ReadOneboardByDsl(long bid);
+
+    List<BoardEntity> ReadBoardByDsl();
 }

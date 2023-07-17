@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 // 해당 클래스의 정적(static) 멤버들을 직접 참조하여 가독성 증가
 
+import java.util.List;
+
 import static com.example.traffic.Board.DATA.QBoardEntity.boardEntity;
 import static com.example.traffic.Comment.DATA.QCommentEntity.commentEntity;
 import static com.example.traffic.User.DATA.QUserEntity.userEntity;
@@ -28,7 +30,15 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     public BoardEntity ReadOneboardByDsl(long bid){
         return queryFactory.selectFrom(boardEntity)
                 .where(boardEntity.bid.eq(bid))
+                .join(boardEntity.comments, commentEntity).fetchJoin()
                 .fetchOne();
+    }
+
+    @Override
+    public List<BoardEntity> ReadBoardByDsl() {
+        return queryFactory.selectFrom(boardEntity)
+                .join(boardEntity.comments, commentEntity).fetchJoin()
+                .fetch();
     }
 
 }

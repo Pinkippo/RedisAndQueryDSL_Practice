@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/board")
 public class BoardController {
@@ -35,7 +37,7 @@ public class BoardController {
     public ResponseEntity<DefaultRes<SpecBoardResponseDTO>> ReadOneBoard(@PathVariable long bid){
         SpecBoardResponseDTO spec = boardService.ReadOneBoard(bid);
         if(spec != null){
-            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
         }
@@ -46,7 +48,7 @@ public class BoardController {
     public ResponseEntity<DefaultRes<SpecBoardResponseDTO>> ReadOneBoardByDsl(@PathVariable long bid){
         SpecBoardResponseDTO spec = boardService.ReadOneBoardByDsl(bid);
         if(spec != null){
-            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
         }
@@ -54,6 +56,15 @@ public class BoardController {
 
 
     // 전체 글 조회
+    @GetMapping("/read")
+    public ResponseEntity<DefaultRes<List<SpecBoardResponseDTO>>> ReadBoard(){
+        List<SpecBoardResponseDTO> spec = boardService.ReadBoard();
+        if(spec != null){
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+        }
+    }
 
 
 }
