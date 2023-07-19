@@ -2,6 +2,7 @@ package com.example.traffic.Board;
 
 import com.example.traffic.Board.DATA.BoardEntity;
 import com.example.traffic.Board.DATA.BoardRequestDTO;
+import com.example.traffic.Board.DATA.BoardSearchDTO;
 import com.example.traffic.Board.DATA.SpecBoardResponseDTO;
 import com.example.traffic.Board.Repository.BoardRepository;
 import com.example.traffic.Comment.DATA.CommentEntity;
@@ -98,6 +99,33 @@ public class BoardService {
 
     public List<SpecBoardResponseDTO> ReadBoard(){
         List<BoardEntity> boardEntities = boardRepository.ReadBoardByDsl();
+        List<SpecBoardResponseDTO> result = new ArrayList<>();
+
+        for (BoardEntity board: boardEntities) {
+            List<CommentForBoardDTO> comments = board.getComments().stream().map(
+                    comment -> new CommentForBoardDTO(comment.getUser().getName(), comment.getWriteDate(), comment.getContent())
+            ).toList();
+
+            SpecBoardResponseDTO specBoardResponseDTO = SpecBoardResponseDTO.builder()
+                    .bid(board.getBid())
+                    .userResponseDTO(new UserResponseDTO(board.getUser()))
+                    .writeDate(board.getWriteDate())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .view(board.getView())
+                    .recommend(board.getRecommend())
+                    .comments(comments)
+                    .build();
+
+            result.add(specBoardResponseDTO);
+
+        }
+
+        return result;
+    }
+
+    public List<SpecBoardResponseDTO> SearchBoard(BoardSearchDTO boardSearchDTO){
+        List<BoardEntity> boardEntities = boardRepository.SearchBoardDsl(boardSearchDTO);
         List<SpecBoardResponseDTO> result = new ArrayList<>();
 
         for (BoardEntity board: boardEntities) {

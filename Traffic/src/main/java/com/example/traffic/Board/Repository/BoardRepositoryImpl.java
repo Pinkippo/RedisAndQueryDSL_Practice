@@ -1,6 +1,8 @@
 package com.example.traffic.Board.Repository;
 
 import com.example.traffic.Board.DATA.BoardEntity;
+import com.example.traffic.Board.DATA.BoardSearchDTO;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -37,6 +39,25 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     @Override
     public List<BoardEntity> ReadBoardByDsl() {
         return queryFactory.selectFrom(boardEntity)
+                .join(boardEntity.comments, commentEntity).fetchJoin()
+                .fetch();
+    }
+
+    @Override
+    public List<BoardEntity> SearchBoardDsl(BoardSearchDTO boardSearchDTO) {
+        BooleanBuilder builder = new BooleanBuilder();
+        if(boardSearchDTO.getContent() != null) {
+            builder.and(boardEntity.content.contains(boardSearchDTO.getContent()));
+        }
+        if(boardSearchDTO.getTitle() != null) {
+            builder.and(boardEntity.title.contains(boardSearchDTO.getTitle()));
+        }
+        if(boardSearchDTO.getName() != null) {
+            builder.and(boardEntity.user.name.eq(boardSearchDTO.getName()));
+        }
+
+        return queryFactory.selectFrom(boardEntity)
+                .where(builder)
                 .join(boardEntity.comments, commentEntity).fetchJoin()
                 .fetch();
     }

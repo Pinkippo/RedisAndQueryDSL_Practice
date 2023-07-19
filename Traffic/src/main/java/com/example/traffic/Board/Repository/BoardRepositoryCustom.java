@@ -1,6 +1,7 @@
 package com.example.traffic.Board.Repository;
 
 import com.example.traffic.Board.DATA.BoardEntity;
+import com.example.traffic.Board.DATA.BoardSearchDTO;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface BoardRepositoryCustom {
     BoardEntity ReadOneboardByDsl(long bid);
 
     List<BoardEntity> ReadBoardByDsl();
+
+    List<BoardEntity> SearchBoardDsl(BoardSearchDTO boardSearchDTO);
 }

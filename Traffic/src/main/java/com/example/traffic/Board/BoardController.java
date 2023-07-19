@@ -1,6 +1,7 @@
 package com.example.traffic.Board;
 
 import com.example.traffic.Board.DATA.BoardRequestDTO;
+import com.example.traffic.Board.DATA.BoardSearchDTO;
 import com.example.traffic.Board.DATA.SpecBoardResponseDTO;
 import com.example.traffic.httpReturn.DefaultRes;
 import com.example.traffic.httpReturn.ResponseMessage;
@@ -60,7 +61,17 @@ public class BoardController {
     public ResponseEntity<DefaultRes<List<SpecBoardResponseDTO>>> ReadBoard(){
         List<SpecBoardResponseDTO> spec = boardService.ReadBoard();
         if(spec != null){
-            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,null, spec), HttpStatus.OK);
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<DefaultRes<List<SpecBoardResponseDTO>>> SearchBoard(@RequestBody BoardSearchDTO boardSearchDTO){
+        List<SpecBoardResponseDTO> spec = boardService.SearchBoard(boardSearchDTO);
+        if(spec != null){
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
         }
