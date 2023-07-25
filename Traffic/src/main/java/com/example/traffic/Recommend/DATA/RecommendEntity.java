@@ -7,7 +7,6 @@ import lombok.*;
 
 @Getter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @IdClass(RecommendId.class)
 @Table(name = "recommend")
@@ -23,4 +22,8 @@ public class RecommendEntity {
     @JoinColumn(name = "bid")
     private BoardEntity board;
 
+    public RecommendEntity(UserEntity user, BoardEntity board) {
+        this.user = user;
+        this.board = board;
+    }
 }
