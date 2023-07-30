@@ -39,7 +39,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     @Override
     public List<BoardEntity> ReadBoardByDsl() {
         return queryFactory.selectFrom(boardEntity)
-                .join(boardEntity.comments, commentEntity).fetchJoin()
+                .leftJoin(boardEntity.comments, commentEntity).fetchJoin()
                 .fetch();
     }
 
